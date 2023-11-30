@@ -1,0 +1,160 @@
+﻿@model List<Nano_Tech.Models.user>
+@using Nano_Tech.Controllers
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="~/Content/admindashstyle.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+
+
+
+    <title>Admin panel</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h3>Welcome @Session["adname"]</h3>
+            </div>
+
+            @{
+                <div class="user">
+                    <button class="btn-danger" onclick="location.href='@Url.Action("Logout", "adminlogin")'">LOGOUT</button>
+                </div>
+            }
+        </div>
+        @{
+            if (@Session["adname"].Equals("admin"))
+            {
+                <div class="sidebar">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                <div>All Orders</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../adminlogin/addadmin">
+                                <i class="fas fa-user"></i>
+                                <div>Add Admin</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="../adminlogin/viewuser">
+                                <i class="fas fa-users"></i>
+                                <div>All User</div>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="../adminlogin/addproduct">
+                                <i class="fas fa-cog"></i>
+                                <div>Add Product</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../adminlogin/viewproduct">
+                                <i class="fas fa-th-large"></i>
+                                <div>All products</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="sidebar">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                <div>All Orders</div>
+                            </a>
+                        </li>
+                        @*<li>
+                            <a href="../adminlogin/addadmin">
+                                <i class="fas fa-user"></i>
+                                <div>Add Admin</div>
+                            </a>
+                        </li>*@
+
+                        @*<li>
+                            <a href="#">
+                                <i class="fas fa-users"></i>
+                                <div>All User</div>
+                            </a>
+                        </li>*@
+
+
+                        <li>
+                            <a href="../adminlogin/addproduct">
+                                <i class="fas fa-cog"></i>
+                                <div>Add Product</div>htgr
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../adminlogin/viewproduct">
+                                <i class="fas fa-th-large"></i>
+                                <div>All products</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+        }
+        <div class="main">
+            <div class="charts">
+                <div class="chart">
+
+
+
+                    <table class="table-bordered">
+                        <tr>
+                            <th>UserName</th>
+                            <th>UserContact</th>
+                            <th>UserEmail</th>
+
+                            <th>Action</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.username</td>
+                                <td>@item.usercontact</td>
+                                <td>@item.useremail</td>
+
+                                <td>
+
+                                    <a href="@Url.Action("deleteuser",new {item.userid})" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+
+</html>
